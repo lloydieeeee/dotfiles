@@ -1,0 +1,10 @@
+[managers.system]
+items = [
+    "postgresql",
+    "libpq-dev",
+]
+
+[managers.services_startup]
+items = [
+    "postgresql",
+]

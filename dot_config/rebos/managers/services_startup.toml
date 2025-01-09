@@ -1,0 +1,13 @@
+# --------------------------- #
+#    Manager Configuration    #
+# --------------------------- #
+
+add = "sudo systemctl enable #:? --now"
+remove = "sudo systemctl disable #:? --now"
+
+plural_name = "startup services"
+
+hook_name = "startup_services"
+
+[config]
+many_args = true

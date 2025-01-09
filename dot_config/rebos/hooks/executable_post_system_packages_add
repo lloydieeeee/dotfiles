@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Check if zsh is installed.
+if command -v zsh > /dev/null 2>&1; then
+    echo "Installation of zsh successful."
+
+    # Change the default shell to zsh
+    chsh -s $(which zsh)
+
+    if [ $? -eq 0 ]; then
+        echo "Shell changed to zsh successfully."
+    else
+        echo "Failed to change shell to zsh."
+    fi
+else
+    echo "Failed to install zsh"
+    exit 1
+fi
+
+# Installing neovim from source
+
+# Pre-requisites packages
+sudo apt-get install -y ninja-build gettext cmake unzip curl build-essential
+
+# Check if git is installed.
+if command -v git > /dev/null 2>&1; then
+    echo "Cloning neovim"
+    git clone https://github.com/neovim/neovim
+
+    if [ -r ~/neovim ]; then
+	    cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo
+	    if [ $? -eq 0 ]; then
+		cd build && cpack -G DEB && sudo dpkg -i nvim-linux64.deb
+		echo "Installation of neovim successful."
+	    else
+		echo "Failed to install neovim."
+	    fi
+    else
+	    echo "Failed to clone neovim"
+    fi
+fi

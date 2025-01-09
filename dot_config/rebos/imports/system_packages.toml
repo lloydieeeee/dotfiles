@@ -1,0 +1,11 @@
+[managers.system]
+items = [
+    "gh",
+    "zsh",
+
+    "fzf",
+    "zoxide",
+    "eza",
+    "ripgrep",
+    "fd-find",
+]

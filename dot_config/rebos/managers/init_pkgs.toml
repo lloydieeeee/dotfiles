@@ -1,0 +1,13 @@
+# --------------------------- #
+#    Manager Configuration    #
+# --------------------------- #
+
+add = "sudo apt install  #:?"
+remove = "sudo apt remove #:?"
+
+plural_name = "initial packages"
+
+hook_name = "init_pkgs"
+
+[config]
+many_args = true

@@ -1,0 +1,54 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+setopt histignorealldups sharehistory
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.hiace/bin:$PATH"
+
+if command -v nvim >/dev/null 2>&1; then
+	export EDITOR=nvim
+fi
+
+if [ -r ~/.config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme ]; then
+	source ~/.config/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
+if [ -r ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+	source ~/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+if [ -r ~/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
+	source ~/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+	bindkey '^[OA' history-substring-search-up
+	bindkey '^[OB' history-substring-search-down
+fi
+
+if [ -r ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+	source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if command -v eza >/dev/null 2>&1; then
+	alias ls="eza --icons -l"
+	alias la="eza --icons -la"
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+	alias cd="z"
+	alias ..="cd .."
+	eval "$(zoxide init zsh)"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

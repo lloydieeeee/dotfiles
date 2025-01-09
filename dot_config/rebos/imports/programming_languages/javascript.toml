@@ -1,0 +1,5 @@
+[managers.system]
+items = [
+    "nodejs",
+    "npm",
+]

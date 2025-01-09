@@ -1,0 +1,4 @@
+[managers.init_pkgs]
+items = [
+   "nala"
+]
