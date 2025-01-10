@@ -1,22 +1,5 @@
 #!/bin/bash
 
-# Check if zsh is installed.
-if command -v zsh > /dev/null 2>&1; then
-    echo "Installation of zsh successful."
-
-    # Change the default shell to zsh
-    chsh -s $(which zsh)
-
-    if [ $? -eq 0 ]; then
-        echo "Shell changed to zsh successfully."
-    else
-        echo "Failed to change shell to zsh."
-    fi
-else
-    echo "Failed to install zsh"
-    exit 1
-fi
-
 # Installing neovim from source
 
 # Pre-requisites packages
@@ -38,4 +21,36 @@ if command -v git > /dev/null 2>&1; then
     else
 	    echo "Failed to clone neovim"
     fi
+fi
+
+# Check if tmux is installed.
+if command -v tmux > /dev/null 2>&1; then
+	# Install tmux plugin manager
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+# Install zsh plugins
+if command -v zsh > /dev/null 2>&1; then
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.config/zsh/plugins/powerlevel10k
+	git clone https://github.com/zsh-users/zsh-autosuggestions ~/.config/zsh/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-history-substring-search ~/.config/zsh/plugins/zsh-history-substring-search
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.config/zsh/plugins/zsh-syntax-highlighting
+fi
+
+# Check if zsh is installed.
+if command -v zsh > /dev/null 2>&1; then
+    echo "Installation of zsh successful."
+
+    # Change the default shell to zsh
+    chsh -s $(which zsh)
+
+    if [ $? -eq 0 ]; then
+	exec $SHELL
+        echo "Shell changed to zsh successfully."
+    else
+        echo "Failed to change shell to zsh."
+    fi
+else
+    echo "Failed to install zsh"
+    exit 1
 fi

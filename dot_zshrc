@@ -12,10 +12,8 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
-
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.hiace/bin:$PATH"
 
 if command -v nvim >/dev/null 2>&1; then
 	export EDITOR=nvim
@@ -37,6 +35,10 @@ fi
 
 if [ -r ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
 	source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -d ~/.tmux/plugins/tmuxifier/bin ]; then
+	eval "$(tmuxifier init -)"
 fi
 
 if command -v eza >/dev/null 2>&1; then
